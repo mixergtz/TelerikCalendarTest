@@ -1,8 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">TelerikCalendarTest</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="app_name">Agenda del Mar</string>
+    <string name="hello_world">30</string>
     <string name="action_settings">Settings</string>
+
+    <!-- OpenWeatherMaps API Key -->
+    <string name="open_weather_maps_app_id">83aacb24eb86f2cf428250929c8eb285</string>
+
+    <!-- Weather Icon Font Values -->
+    <string name="weather_sunny"></string>
+    <string name="weather_clear_night"></string>
+    <string name="weather_foggy"></string>
+    <string name="weather_cloudy"></string>
+    <string name="weather_rainy"></string>
+    <string name="weather_snowy"></string>
+    <string name="weather_thunder"></string>
+    <string name="weather_drizzle"></string>
+    <string name="place_not_found">Sorry, no weather data found.</string>
+
+    <string-array name="actionBarSpinner">
+        <item>Inicio</item>
+        <item>Hoy</item>
+        <item>Semana</item>
+        <item>Mes</item>
+    </string-array>
+
+    <string name="title_activity_full_screen_images">fullScreenImages</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_add_new_events">add_new_events</string>
+    <string name="title_activity_pdf_viewer">pdfViewer</string>
+    <string name="title_activity_day_events">Eventos</string>
+    <string name="title_activity_new_event">Nuevo evento</string>
+
+
+    <string-array name="availability">
+        <item>Busy</item>
+        <item>Available</item>
+        <item>Tentative</item>
+    </string-array>
+
+    <string-array name="rrule">
+        <item>Nunca</item>
+        <item>Todos los dias</item>
+        <item>Todas las semanas</item>
+        <item>Cada dos semanas</item>
+        <item>Todas los meses</item>
+        <item>Por siempre</item>
+    </string-array>
+
+    <string-array name="reminder">
+        <item>5 minutos</item>
+        <item>10 minutos</item>
+        <item>15 minutos</item>
+        <item>20 minutos</item>
+        <item>25 minutos</item>
+        <item>30 minutos</item>
+        <item>45 minutos</item>
+        <item>1 hora</item>
+        <item>2 horas</item>
+        <item>3 horas</item>
+        <item>12 horas</item>
+        <item>24 horas</item>
+        <item>2 dias</item>
+        <item>1 semana</item>
+    </string-array>
+
+
+
+    <!-- Calender Strings -->
+
+
 
 </resources>

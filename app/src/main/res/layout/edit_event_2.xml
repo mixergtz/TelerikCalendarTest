@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!-- DESCRIPTION -->
+    <LinearLayout android:id="@+id/description_row"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dip"
+        android:focusable="true">
+        <EditText
+            android:id="@+id/description"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_gravity="bottom"
+            android:minHeight="48dip"
+            android:hint="Notas"
+            android:inputType="textAutoCorrect|textCapSentences|textMultiLine"
+            style="@style/TextAppearance.EditEvent_Value"
+            android:capitalize="sentences" />
+    </LinearLayout>
+    <View
+        style="@style/EditEventSeparator"/>
+    <!-- REPEATS -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="6dp"
+        android:focusable="true">
+        <TextView
+            android:id="@+id/repeats_label"
+            android:text="Repetir"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginBottom="0dip"
+            style="@style/TextAppearance.EditEvent_LabelSmall" />
+
+
+        <Spinner
+            android:id="@+id/rrule"
+            android:text="No repetir"
+            android:entries="@array/rrule"
+            style="@style/TextAppearance.EditEvent_SpinnerButton"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginTop="-12dip"
+            android:gravity="left|center_vertical"
+            android:contentDescription="Mostrarme"/>
+
+
+    </LinearLayout>
+    <View
+        style="@style/EditEventSeparator"/>
+    <!-- REMINDERS -->
+    <LinearLayout
+        android:id="@+id/reminders_row"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="true">
+        <TextView
+            android:id="@+id/reminders_group_label"
+            android:text="Alerta"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="0dip"
+            style="@style/TextAppearance.EditEvent_LabelSmall" />
+        <LinearLayout
+            android:id="@+id/reminder_items_container"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginTop="-8dip"
+            android:layout_marginBottom="8dip"
+            android:layout_marginRight="8dip"
+            android:orientation="vertical" />
+
+        <Spinner
+            android:id="@+id/reminder_add"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_gravity="center_vertical"
+            android:gravity="top"
+            android:paddingBottom="12dp"
+            android:layout_marginTop="0dip"
+            android:layout_marginBottom="0dip"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            android:textColor="#FF777777"
+            android:minHeight="20dip"
+
+            android:entries="@array/reminder"
+            style="@style/TextAppearance.EditEvent_SpinnerButton"
+            android:contentDescription="Mostrarme"
+            />
+
+    </LinearLayout>
+    <View
+        style="@style/EditEventSeparator"/>
+    <!-- PRESENCE - Show me as [busy | available] -->
+    <LinearLayout
+        android:id="@+id/availability_row"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="6dp">
+        <TextView
+            android:id="@+id/presence_label"
+            android:text="Mostrarme"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            style="@style/TextAppearance.EditEvent_LabelSmall"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="0dip"
+            android:paddingRight="4dip" />
+        <Spinner
+            android:id="@+id/availability"
+            android:entries="@array/availability"
+            style="@style/TextAppearance.EditEvent_SpinnerButton"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:contentDescription="Mostrarme"
+             />
+    </LinearLayout>
+
+</LinearLayout>

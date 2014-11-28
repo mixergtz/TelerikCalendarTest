@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.util.Log;
@@ -12,7 +11,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.telerik.widget.calendar.CalendarCell;
 import com.telerik.widget.calendar.CalendarDisplayMode;
@@ -21,7 +19,6 @@ import com.telerik.widget.calendar.RadCalendarView;
 import com.telerik.widget.calendar.WeekNumbersDisplayMode;
 import com.telerik.widget.calendar.events.Event;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -29,6 +26,7 @@ import java.util.List;
 public class MainActivity extends Activity {
     Button btnAddEvent;
     RadCalendarView calendarView;
+    List<Event> events;
 
 
 
@@ -43,12 +41,9 @@ public class MainActivity extends Activity {
         calendarView.setWeekNumbersDisplayMode(WeekNumbersDisplayMode.None);
         calendarView.getGridLinesLayer().setColor(Color.TRANSPARENT);
         calendarView.setSelectionMode(CalendarSelectionMode.Single);
-        calendarView.setDisplayMode(CalendarDisplayMode.Year);
+        calendarView.setDisplayMode(CalendarDisplayMode.Month);
 
-        readEventsFromCalendars();
-
-
-
+        refreshEvents();
 
         calendarView.setOnCellClickListener(new RadCalendarView.OnCellClickListener() {
             @Override
@@ -56,73 +51,52 @@ public class MainActivity extends Activity {
                 if (calendarCell.getEvents() != null &&
                         calendarCell.getEvents().size() > 0) {
 
-                    Event firstEvent = calendarCell.getEvents().get(0);
 
-                    String eventInfo = String.format("%tT - %tT: %s",
-                            firstEvent.getStartDate(),
-                            firstEvent.getEndDate(),
-                            firstEvent.getTitle());
 
-                    Toast.makeText(
-                            getApplicationContext(),
-                            eventInfo,
-                            Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MainActivity.this, DayEvents.class);
+                    intent.putExtra("selectedDate", calendarCell.getDate());
+                    startActivity(intent);
+
                 }
             }
         });
-
 
 
         btnAddEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-            Intent intent = new Intent(Intent.ACTION_EDIT);
-            intent.setType("vnd.android.cursor.item/event");
-            intent.putExtra(CalendarContract.Events.TITLE, "Hola");
-            intent.putExtra(CalendarContract.Events.ALL_DAY, false);// periodicity
-            intent.putExtra(CalendarContract.Events.DESCRIPTION, "Hola este es un evento");
-            startActivityForResult(intent, 1);
+                /*
+                Intent intent = new Intent(Intent.ACTION_EDIT);
+                intent.setType("vnd.android.cursor.item/event");
+                intent.putExtra(CalendarContract.Events.TITLE, "Hola");
+                intent.putExtra(CalendarContract.Events.ALL_DAY, false);// periodicity
+                intent.putExtra(CalendarContract.Events.DESCRIPTION, "Hola este es un evento");
+                startActivityForResult(intent, 1);
+                */
+
+                Intent intent = new Intent(MainActivity.this, NewEventActivity.class);
+                startActivity(intent);
 
             }
         });
 
     }
 
-
-    private void readEventsFromCalendars(){
-        List<Event> events = new ArrayList<Event>();
-
-        Cursor cursor = this.getContentResolver()
-                .query(
-                        Uri.parse("content://com.android.calendar/events"),
-                        new String[] { "calendar_id", "title", "description",
-                                "dtstart", "dtend", "eventLocation" }, null,
-                        null, null);
-        cursor.moveToFirst();
-
-        // fetching calendars name
-        String CNames[] = new String[cursor.getCount()];
-
-        // fetching calendars id
-        for (int i = 0; i < CNames.length; i++) {
-
-            Event event = new Event(cursor.getString(1), Long.parseLong(cursor.getString(3)), Long.parseLong(cursor.getString(4)));
-            events.add(event);
-            CNames[i] = cursor.getString(1);
-            cursor.moveToNext();
-
-        }
-
+    private void refreshEvents(){
+        long a = 1416978000000L;
+        long b = 1419570000000L;
+        events = CalendarHelper.GetEventsFromCalendars(this, a, b);
         calendarView.getEventAdapter().setEvents(events);
         calendarView.notifyDataChanged();
-
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         //Calendar App doesn't return a resultCode depending on result, so we just update the calendar anyway
-        readEventsFromCalendars();
+        refreshEvents();
+        Log.d("HI", "HI from activity result");
 
     }
 
